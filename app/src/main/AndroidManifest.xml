@@ -16,7 +16,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Splash">
+        <activity android:name=".Actitivties.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -36,10 +36,10 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".Mapa"
+            android:name=".Actitivties.Mapa"
             android:label="@string/title_activity_mapa" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Actitivties.MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
