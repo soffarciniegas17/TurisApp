@@ -11,4 +11,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="url_base_lugares">http://10.103.70.22/turisapp/</string>
+    <string name="url_base_rutas">https://maps.googleapis.com/maps/api/directions/</string>
 </resources>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView android:layout_width="190dp"
+
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    card_view:cardUseCompatPadding="true"
+    card_view:cardElevation="10dp"
+    card_view:cardCornerRadius="10dp"
+    >
+
+
+
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+
+        <android.support.constraint.ConstraintLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/item_lugar_imagen"
+                android:layout_width="match_parent"
+                android:layout_height="170dp"
+                android:background="@color/negro_claro"
+                />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="170dp"
+                android:background="@drawable/fondo_degradado_transparente"/>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="170dp">
+
+                <TextView
+                    android:gravity="center"
+                    android:id="@+id/item_lugar_nombre"
+                    android:padding="15dp"
+                    android:textSize="19dp"
+                    android:layout_width="match_parent"
+                    android:textStyle="bold"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:text="Nombre"/>
+
+            </LinearLayout>
+
+        </android.support.constraint.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/item_lugar_descripcion_corta"
+            android:layout_width="170dp"
+            android:layout_height="0dp"
+            android:background="@android:color/black"
+            android:textColor="@android:color/white"
+            android:text="Description corta"
+            android:gravity="center"
+            android:padding="4dp"
+            />
+        <TextView
+            android:id="@+id/item_lugar_direccion"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:padding="9dp"
+            android:background="@android:color/black"
+            android:layout_height="match_parent"
+            android:textColor="@color/gris_claro"
+            android:text="Direccion"/>
+    </LinearLayout>
+</android.support.v7.widget.CardView>

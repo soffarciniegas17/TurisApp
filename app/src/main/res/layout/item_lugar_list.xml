@@ -27,7 +27,7 @@
         android:id="@+id/item_lugar_imagen"
         android:layout_width="match_parent"
         android:layout_height="170dp"
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/negro_claro"
         />
     <View
         android:layout_width="match_parent"
