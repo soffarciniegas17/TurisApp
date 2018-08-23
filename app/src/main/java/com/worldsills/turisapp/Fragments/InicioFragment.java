@@ -29,10 +29,12 @@ public class InicioFragment extends Fragment {
 
         View view= inflater.inflate(R.layout.fragment_inicio, container, false);
 
-        ImageView image = view.findViewById(R.id.image);
         TextView text = view.findViewById(R.id.text);
 
-        image.set
+        text.setText("TuristApp es una aplicación que te permitirá conocer e indagar por diversos " +
+                "sitios turisticos, donde ppodrás tener una pequeña descrición, ubicación, y una imagen del lugar" +
+                "y así escoger de manera adecuada tu próximo destino. Anexando que tiene la opción de marcar la ruta desde " +
+                "su origen hasta el lugar. Mantiene una funcionabilidad comoda para todo usuario.");
 
         return view;
     }

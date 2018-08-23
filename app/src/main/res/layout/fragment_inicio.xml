@@ -9,48 +9,38 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <ScrollView
+    <android.support.v7.widget.CardView
         android:layout_gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        
+        android:layout_width="350dp"
+        android:layout_height="300dp"
+        app:cardElevation="10dp"
+        app:cardCornerRadius="10dp">
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="match_parent"
             android:orientation="vertical">
-            
-            <android.support.v7.widget.CardView
-                android:layout_width="240dp"
-                android:layout_gravity="center"
-                android:layout_height="230dp"
-                app:cardCornerRadius="10dp"
-                android:elevation="10dp"
-                app:cardUseCompatPadding="true">
-                
-                
-                <ImageView
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
-                    android:src="@drawable/logoturis"
-                    android:background="@android:color/black"
-                    />
 
-
-            </android.support.v7.widget.CardView>
-
+            <ImageView
+                android:background="@android:color/black"
+                android:src="@drawable/logoturis"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                />
 
             <TextView
                 android:id="@+id/text"
-                android:layout_width="match_parent"
-                android:layout_height="178dp"
-                android:padding="30dp"
-                android:text="Descipcion de la app"
                 android:textSize="18dp"
-                android:textStyle="bold" />
+                android:text=""
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
         </LinearLayout>
-        
-    </ScrollView>
-    
-    
+
+
+
+    </android.support.v7.widget.CardView>
+
+
     
 </FrameLayout>
