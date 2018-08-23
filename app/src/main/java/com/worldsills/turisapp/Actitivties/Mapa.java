@@ -2,6 +2,7 @@ package com.worldsills.turisapp.Actitivties;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationManager;
 import android.support.v4.app.ActivityCompat;
@@ -42,7 +43,7 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback {
     private int fragmentActivo;
     private String tipoLugar;
     private int itemPresionado;
-    private String origin, destination;
+    private LatLng origin, destination;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,11 +80,6 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback {
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-
         consumeServiciosLugares(tipoLugar);
     }
 
@@ -99,7 +95,7 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback {
             @Override
             public void onResponse(Call<List<ItemLugar>> call, Response<List<ItemLugar>> response) {
                 if (fragmentActivo == 1) agregaMarcadoresLugares(response.body());
-                else rutaDeViaje(response.body());
+                else actualizaPantalla(response.body());
             }
 
             @Override
@@ -126,12 +122,30 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback {
         mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(builder.build(), 0));
 
     }
-
-    public void rutaDeViaje(List<ItemLugar> lugares) {
+    public void actualizaPantalla(List<ItemLugar> lugares){
         ItemLugar lugar = lugares.get(itemPresionado);
-        destination = lugar.getLatitud() + "," + lugar.getLongitud();
+        destination = new LatLng(lugar.getLatitud(),lugar.getLongitud());
         origin = miPosicion();
 
+        mMap.addMarker(new MarkerOptions().title(lugar.getNombre()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
+        .position(destination));
+        mMap.addMarker(new MarkerOptions().title("Mi posicion").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
+                .position(origin));
+
+        LatLngBounds.Builder builder=new LatLngBounds.Builder();
+        builder.include(origin);
+        builder.include(destination);
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(builder.build(),0));
+
+
+        rutaDeViaje(origin, destination);
+    }
+
+    public void rutaDeViaje(LatLng origen, LatLng destino) {
+
+        String orig=origen.latitude+","+origen.longitude;
+        String dest=destino.latitude+","+destino.longitude;
 
         Retrofit retrofit = new Retrofit.Builder().baseUrl(getResources().getString(R.string.url_base_rutas))
                 .addConverterFactory(GsonConverterFactory.create()).build();
@@ -139,7 +153,7 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback {
         ConsumirServicios servicios = retrofit.create(ConsumirServicios.class);
 
 
-        Call<ResponseBody> res = servicios.getRuta(origin,destination);
+        Call<ResponseBody> res = servicios.getRuta(orig,dest);
 
         res.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -151,11 +165,14 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+
                 String points=obj.get("routes").getAsJsonArray().get(0).getAsJsonObject()
                         .get("overview_polyline").getAsJsonObject()
                         .get("points").getAsString();
 
-                mMap.addPolyline(new PolylineOptions().color(android.R.color.black).width(7)
+
+
+                mMap.addPolyline(new PolylineOptions().color(Color.BLACK)
                 .addAll(PolyUtil.decode(points)));
             }
 
@@ -166,9 +183,9 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback {
         });
     }
 
-    public String miPosicion() {
+    public LatLng miPosicion() {
 
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},2);
+
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
@@ -183,6 +200,6 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback {
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 
-        return location.getLatitude()+","+location.getLongitude();
+        return new LatLng(location.getLatitude(),location.getLongitude());
     }
 }

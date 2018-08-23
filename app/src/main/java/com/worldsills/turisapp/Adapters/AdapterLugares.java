@@ -81,7 +81,7 @@ public class AdapterLugares extends BaseAdapter {
             }
         }
 
-        Glide.with(context).load(R.string.url_base_lugares+url).centerCrop()
+        Glide.with(context).load(context.getResources().getString(R.string.url_base_lugares)+url).centerCrop()
                 .error(R.drawable.logoturis).placeholder(R.color.negro_claro).into(holder.imagen);
 
         holder.ubicacion.setText(lugar.getUbicacion());

@@ -2,7 +2,7 @@ package com.worldsills.turisapp.Fragments;
 
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,14 +28,6 @@ public class InicioFragment extends Fragment {
         // Inflate the layout for this fragment
 
         View view= inflater.inflate(R.layout.fragment_inicio, container, false);
-
-        TextView text = view.findViewById(R.id.text);
-
-        text.setText("TuristApp es una aplicación que te permitirá conocer e indagar por diversos " +
-                "sitios turisticos, donde ppodrás tener una pequeña descrición, ubicación, y una imagen del lugar" +
-                "y así escoger de manera adecuada tu próximo destino. Anexando que tiene la opción de marcar la ruta desde " +
-                "su origen hasta el lugar. Mantiene una funcionabilidad comoda para todo usuario.");
-
         return view;
     }
 

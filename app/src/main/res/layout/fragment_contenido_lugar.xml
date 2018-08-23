@@ -3,19 +3,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+
     tools:context=".Fragments.ContenidoLugar">
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        card_view:cardUseCompatPadding="true"
+        card_view:cardElevation="12dp"
+        card_view:cardCornerRadius="15dp">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center">
-        <android.support.v7.widget.CardView
-            android:layout_width="340dp"
-            android:layout_height="480dp"
-            android:layout_gravity="center"
-            app:cardBackgroundColor="@android:color/black"
-            app:cardCornerRadius="20dp">
+        >
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -28,12 +31,14 @@
                 android:id="@+id/foto"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
+
                 android:background="@drawable/ic_launcher_background" />
 
 
             <TextView
                 android:id="@+id/titulo"
                 android:text="Titulo"
+                android:gravity="center"
                 android:textStyle="bold"
                 android:textColor="@android:color/white"
                 android:textSize="25dp"
@@ -43,15 +48,17 @@
             <TextView
                 android:id="@+id/description"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:text="Descripcion"
-                android:textAlignment="center"
+                android:gravity="center"
                 android:textColor="@android:color/white" />
         </LinearLayout>
 
+    </ScrollView>
+
         </android.support.v7.widget.CardView>
 
-    </ScrollView>
+
 
 
 

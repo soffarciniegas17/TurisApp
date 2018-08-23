@@ -44,7 +44,7 @@
             <TextView
                 android:id="@+id/item_lugar_nombre"
                 android:padding="15dp"
-                android:textSize="19dp"
+                android:textSize="14dp"
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:textStyle="bold"

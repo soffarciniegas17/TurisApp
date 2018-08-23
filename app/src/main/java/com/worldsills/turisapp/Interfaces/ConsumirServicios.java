@@ -14,6 +14,6 @@ public interface ConsumirServicios {
     @GET("webservice.php/")
     Call<List<ItemLugar>> getLugares(@Query("tipo") String tipoLugar);
 
-    @GET("json/")
+    @GET("json")
     Call<ResponseBody> getRuta(@Query("origin") String origen, @Query("destination") String destino);
 }

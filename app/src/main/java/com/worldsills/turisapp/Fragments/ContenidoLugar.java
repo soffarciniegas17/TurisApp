@@ -34,6 +34,7 @@ public class ContenidoLugar extends Fragment {
     private String categoria;
     ImageView foto;
     TextView description, titulo;
+    Activity thisActivity;
 
     public ContenidoLugar() {
         // Required empty public constructor
@@ -47,13 +48,13 @@ public class ContenidoLugar extends Fragment {
         View view= inflater.inflate(R.layout.fragment_contenido_lugar, container, false);
 
 
-
+        thisActivity= getActivity();
         foto= view.findViewById(R.id.foto);
 
         description=view.findViewById(R.id.description);
         titulo= view.findViewById(R.id.titulo);
 
-        itemPresionado=-1;
+        itemPresionado=0;
         categoria="sitios";
 
         if(getArguments()!=null){
@@ -61,7 +62,7 @@ public class ContenidoLugar extends Fragment {
             categoria= getArguments().getString("CATEG");
         }
 
-        Activity thisActivity= getActivity();
+
         consumirDatos();
 
         return view;
@@ -108,8 +109,9 @@ public class ContenidoLugar extends Fragment {
                 break;
             }
         }
-
-        Glide.with(getActivity()).load(getString(R.string.url_base_lugares)+url)
+        if(thisActivity!=null && isAdded())
+        Glide.with(thisActivity).load(getResources().getString(R.string.url_base_lugares)+url).centerCrop().error(R.drawable.logoturis)
+                .placeholder(android.R.color.black)
                 .into(foto);
 
 

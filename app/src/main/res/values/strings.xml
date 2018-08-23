@@ -12,6 +12,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <string name="url_base_lugares">http://10.103.70.22/turisapp/</string>
+    <string name="url_base_lugares">http://192.168.1.54/turisapp/</string>
     <string name="url_base_rutas">https://maps.googleapis.com/maps/api/directions/</string>
+
+    <string name="descripcion_app">TuristApp es una aplicación que te permitirá conocer e indagar por diversos sitios turisticos, donde ppodrás tener una pequeña descrición, ubicación, y una imagen del lugar y así escoger de manera adecuada tu próximo destino. Anexando que tiene la opción de marcar la ruta desde su origen hasta el lugar. Mantiene una funcionabilidad comoda para todo usuario.</string>
 </resources>

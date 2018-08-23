@@ -1,6 +1,7 @@
 package com.worldsills.turisapp.Fragments;
 
 
+import android.app.Activity;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -33,6 +34,7 @@ public class ListaFragment extends Fragment {
     private AdapterLugares adapter;
     private boolean vista;
     private String tipoLugar;
+    private Activity activity;
 
 
     public ListaFragment() {
@@ -47,6 +49,7 @@ public class ListaFragment extends Fragment {
 
         View vistaFragment=inflater.inflate(R.layout.fragment_lista, container, false);
 
+        activity=getActivity();
         gridView=vistaFragment.findViewById(R.id.gridview);
         vista=false;
 
@@ -85,12 +88,16 @@ public class ListaFragment extends Fragment {
     public void cardaListaLugares(List<ItemLugar> lugares){
 
         try{
-            if (getResources().getConfiguration().orientation== Configuration.ORIENTATION_LANDSCAPE){
-                adapter=new AdapterLugares(getActivity(),R.layout.item_lugar_list_land,lugares);
+            if (activity.getResources().getConfiguration().orientation== Configuration.ORIENTATION_LANDSCAPE){
+                adapter=new AdapterLugares(activity,R.layout.item_lugar_list_land,lugares);
+                gridView.setNumColumns(1);
             }else if(vista){
-                adapter=new AdapterLugares(getActivity(),R.layout.item_lugar_list,lugares);
+                adapter=new AdapterLugares(activity,R.layout.item_lugar_list,lugares);
+                gridView.setNumColumns(1);
             }else{
-                adapter=new AdapterLugares(getActivity(),R.layout.item_lugar_grid,lugares);
+                adapter=new AdapterLugares(activity,R.layout.item_lugar_grid,lugares);
+                gridView.setNumColumns(2);
+
             }
             gridView.setAdapter(adapter);
 

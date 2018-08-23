@@ -23,6 +23,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
 
+import com.worldsills.turisapp.Fragments.ContenidoLugar;
 import com.worldsills.turisapp.Fragments.InicioFragment;
 import com.worldsills.turisapp.Fragments.ListaFragment;
 import com.worldsills.turisapp.Interfaces.ComunicaFragment;
@@ -77,7 +78,8 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else if(fragmentActivo==2) {
-            cargaFragment(1, tipoLugar);
+            fragmentActivo=1;
+            cargaFragment(fragmentActivo, tipoLugar);
         }else {
                 super.onBackPressed();
 
@@ -106,10 +108,10 @@ public class MainActivity extends AppCompatActivity
         }else if(id==R.id.action_vista){
             if (vista){
                 vista=false;
-                menuItem.setIcon(R.drawable.icono_grid);
+                menuItem.setIcon(R.drawable.icon_list);
             }else{
                 vista=true;
-                menuItem.setIcon(R.drawable.icon_list);
+                menuItem.setIcon(R.drawable.icono_grid);
 
             }
         }
@@ -125,7 +127,8 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            fragmentActivo=0;
+
+            cargaFragment(0,"");
 
         } else if (id == R.id.nav_sitios) {
             cargaFragment(1,"sitios");
@@ -168,8 +171,9 @@ public class MainActivity extends AppCompatActivity
                     break;
                 case 1:
 
-                    contenedor1.getLayoutParams().width=(int)((getResources().getDisplayMetrics().widthPixels)/1.7);
+                    contenedor1.getLayoutParams().width=(int)((getResources().getDisplayMetrics().widthPixels)/2.5);
                     itemPresionado=0;
+                    transaction.replace(R.id.contenedor_fragment_1,frag);
                     cargaFragment(2,tipoLugar);
                     break;
                 case 2:
@@ -203,8 +207,12 @@ public class MainActivity extends AppCompatActivity
 
                 break;
             case 1:
+                try{
+                    menuItem.setVisible(true);
+                }catch (Exception e){}
                 toolbar.setTitle(tipoLugar);
                 fab.setImageResource(R.drawable.icono_marcador);
+                fab.setVisibility(View.VISIBLE);
                 break;
             case 2:
                 toolbar.setTitle("Detalle");
@@ -212,15 +220,16 @@ public class MainActivity extends AppCompatActivity
                 try{
                     menuItem.setVisible(false);
                 }catch (Exception e){}
+                fab.setVisibility(View.VISIBLE);
                 break;
         }
     }
 
     public Fragment getFragment(int tipo){
         switch (tipo){
-            case 0: return new Fragment();
+            case 0: return new InicioFragment();
             case 1: return new ListaFragment();
-            default: return new Fragment();
+            default: return new ContenidoLugar();
         }
     }
 
@@ -240,9 +249,21 @@ public class MainActivity extends AppCompatActivity
         tipoLugar=datos.getString("CATEG","sitios");
 
         if (getResources().getConfiguration().orientation==Configuration.ORIENTATION_LANDSCAPE && fragmentActivo==2){
-            cargaFragment(1,tipoLugar);
+            FragmentManager manager=getFragmentManager();
+            FragmentTransaction transaction=manager.beginTransaction();
+            Fragment frag=getFragment(1);
+
+            Bundle enviar=new Bundle();
+            enviar.putBoolean("VISTA",vista);
+            enviar.putString("CATEG", tipoLugar);
+            enviar.putInt("ITEM", itemPresionado);
+            frag.setArguments(enviar);
+
+            transaction.replace(R.id.contenedor_fragment_1,frag).commit();
+        }else{
+            cargaFragment(fragmentActivo,tipoLugar);
         }
-        cargaFragment(fragmentActivo,tipoLugar);
+
     }
     public void onPause(){
         super.onPause();
